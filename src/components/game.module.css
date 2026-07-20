@@ -1,0 +1,147 @@
+.card {
+  background-color: rgba(0, 0, 0, 0.4);
+  max-width: 800px;
+  margin: 24px auto;
+  border: 1px solid rgba(0, 0, 0, 0, 0.2);
+  padding: 20px;
+  position: relative;
+}
+
+.cardView {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.questionHeading {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.badge {
+  background-color: rgb(240, 240, 203);
+  color: black;
+  border: 1px solid rgb(218, 218, 116);
+  padding: 4px;
+  border-radius: 8px;
+  font-size: 10px;
+  text-transform: uppercase;
+  line-height: 12px;
+  font-weight: 600;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  min-width: 50px;
+}
+.chip {
+  background-color: rgb(173, 173, 21);
+  color: rgb(255, 255, 255);
+  border: 1px solid rgb(218, 218, 116);
+  padding: 2px 6px;
+  border-radius: 8px;
+  font-size: 10px;
+  text-transform: uppercase;
+  line-height: 10px;
+  font-weight: 600;
+}
+
+.level {
+  text-align: left;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.btnBox {
+  width: 100%;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 800px;
+  margin: 24px auto;
+}
+
+.btnPrimary {
+  border: 1px solid rgb(240, 240, 203);
+  color: black;
+  padding: 0px 20px;
+  height: 36px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 36px;
+  border-radius: 8px;
+}
+.btnSecondary {
+  background-color: rgb(240, 240, 203);
+  border: 1px solid rgb(224, 224, 145);
+  color: black;
+  padding: 0px 20px;
+  height: 36px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 36px;
+  border-radius: 8px;
+}
+
+.questionCount {
+  width: 100%;
+  max-width: 800px;
+  margin: 24px auto;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.heading {
+  font-size: 42px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-bottom: 30pxs;
+}
+
+.done {
+  min-height: 350px;
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.done h2 {
+  font-size: 62px;
+}
+
+.questionCard {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  font-size: 14px;
+  font-weight: 400;
+  border: 1px solid rgb(170, 230, 170);
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+}
+
+.radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.correct {
+  border: 1px solid green;
+}
+.incorrect {
+  border: 1px solid red;
+}
