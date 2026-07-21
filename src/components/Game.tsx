@@ -92,7 +92,7 @@ const Game = () => {
           className={styles.btnSecondary}
           onClick={() => {
             setQuestionIndex(0);
-            setTimeLeft(1 * 60);
+            setTimeLeft(15 * 60);
             setRewards(0);
             localStorage.clear();
           }}
