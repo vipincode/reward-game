@@ -11,7 +11,7 @@ const Game = () => {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [totalQuestion, setTotalQuestion] = useState(0);
   const [rewards, setRewards] = useState<number>(0);
-  const [timeLeft, setTimeLeft] = useState(1 * 60);
+  const [timeLeft, setTimeLeft] = useState(15 * 60);
 
   useEffect(() => {
     const fetchData = async () => {
