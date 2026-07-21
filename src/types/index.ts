@@ -13,3 +13,9 @@ export interface ResultType {
   response_code: number;
   results: Questions[];
 }
+
+export const questionLabel = {
+  EASY: "easy",
+  MEDIUM: "medium",
+  HARD: "hard",
+} as const;

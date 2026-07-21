@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { API_URL, type Questions } from "../types";
+import { API_URL, questionLabel, type Questions } from "../types";
 import styles from "./game.module.css";
 import QuestionCard from "./questions-card";
 
@@ -11,6 +11,7 @@ const Game = () => {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [totalQuestion, setTotalQuestion] = useState(0);
   const [rewards, setRewards] = useState<number>(0);
+  const [timeLeft, setTimeLeft] = useState(1 * 60);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,6 +35,24 @@ const Game = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(intervalId);
+
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [timeLeft]);
+
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+
   const getQuestionByIndex = questions[questionIndex];
 
   const handleNext = () => {
@@ -56,17 +75,27 @@ const Game = () => {
   const handleRewards = () => {
     const selectAnswer = localStorage.getItem("correctAnswer");
     if (getQuestionByIndex.correct_answer === selectAnswer) {
-      setRewards((prev) => prev + 1000);
+      if (getQuestionByIndex.difficulty === questionLabel.EASY)
+        setRewards((prev) => prev + 1000);
+      if (getQuestionByIndex.difficulty === questionLabel.MEDIUM)
+        setRewards((prev) => prev + 2000);
+      if (getQuestionByIndex.difficulty === questionLabel.HARD)
+        setRewards((prev) => prev + 5000);
     }
   };
 
-  if (questionIndex === questions.length - 1) {
+  if (questionIndex === questions.length - 1 || timeLeft === 0) {
     return (
       <div className={styles.done}>
         <h2>Great job you have done</h2>
         <button
           className={styles.btnSecondary}
-          onClick={() => setQuestionIndex(0)}
+          onClick={() => {
+            setQuestionIndex(0);
+            setTimeLeft(1 * 60);
+            setRewards(0);
+            localStorage.clear();
+          }}
         >
           Lets try again!
         </button>
@@ -75,16 +104,36 @@ const Game = () => {
   }
 
   if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  // if (error) return <p>{error}</p>;
 
   return (
     <div>
       <h1 className={styles.heading}>
         Game have total {questions.length} questions
       </h1>
-      <div className={styles.questionCount}>
-        <p>Total Points: {rewards}</p>
-        <p>Question No: {questionIndex + 1}</p>
+      <div
+        className={styles.card}
+        style={{
+          padding: "14px",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <div
+          className={styles.questionCount}
+          style={{ alignItems: "flex-start", margin: 0 }}
+        >
+          <p>For Easy Get: 1000 points</p>
+          <p>For Medium Get: 2000 points</p>
+          <p>For Hard Get: 5000 points</p>
+        </div>
+        <div className={styles.questionCount} style={{ margin: 0 }}>
+          <p>
+            Time Left: {minutes}:{seconds.toString().padStart(2, "0")}
+          </p>
+          <p>Total Points: {rewards}</p>
+          <p>Question No: {questionIndex + 1}</p>
+        </div>
       </div>
       {questions.length > 0 ? (
         <QuestionCard

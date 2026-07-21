@@ -31,7 +31,7 @@ const QuestionCard = ({
         Difficulty level{" "}
         <span className={styles.chip}>{question.difficulty}</span>
       </div>
-      <div>{question.correct_answer === answer ? "Correct" : "Incorrect"}</div>
+
       <h2 className={styles.questionHeading}>{question.question}</h2>
       <div className={styles.badge}>{question.type}</div>
       <div>
